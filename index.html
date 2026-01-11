@@ -91,17 +91,15 @@
             text-shadow: 0px 4px 10px rgba(0,0,0,0.9);
         }
 
-        /* TIPOGRAFÍA BLACK DE ALTO IMPACTO */
         .hero-content h1 { 
             font-family: 'Montserrat', sans-serif; 
             font-weight: 900;
-            font-size: 6rem; 
+            font-size: clamp(2.5rem, 8vw, 6rem); 
             text-transform: uppercase; 
             margin-bottom: 20px; 
             text-shadow: 2px 4px 20px rgba(0,0,0,0.6);
             line-height: 0.9;
             letter-spacing: -3px;
-            tracking-tighter;
         }
 
         /* --- BARRA DE CARACTERÍSTICAS --- */
@@ -162,6 +160,7 @@
             cursor: pointer;
             margin-left: 20px;
             letter-spacing: 1px;
+            white-space: nowrap;
         }
 
         .btn-cta-specs:hover { background: transparent; color: var(--gold); }
@@ -185,7 +184,6 @@
             padding: 15px; 
             border: 1px solid var(--gold); 
             position: relative;
-            margin-right: 20px;
         }
 
         .desc-slider-container {
@@ -240,8 +238,6 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .desc-nav-btn:hover { background: var(--gold); color: white; }
-
         /* --- AMENITIES --- */
         .amenities { padding: 100px 10%; background: #fbfbfb; text-align: center; }
         .amenities h3 { font-size: 3rem; margin-bottom: 60px; font-family: 'Montserrat'; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; }
@@ -275,16 +271,6 @@
             box-shadow: 0 30px 60px rgba(0,0,0,0.5);
         }
 
-        .lifestyle-card .tag {
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            display: block;
-            margin-bottom: 20px;
-        }
-
         .lifestyle-card h2 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 900;
@@ -295,33 +281,67 @@
             letter-spacing: -1.5px;
         }
 
-        .lifestyle-card p {
-            font-size: 1.15rem;
-            font-weight: 300;
-            color: rgba(255,255,255,0.9);
-            line-height: 1.8;
-            letter-spacing: 0.5px;
+        /* --- FORM SECTION --- */
+        .form-section { display: flex; flex-wrap: wrap; min-height: 600px; }
+        .form-text { flex: 1; min-width: 320px; padding: 80px 8%; background: var(--black); color: white; display: flex; flex-direction: column; justify-content: center; }
+        .form-text h2 { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--gold); font-weight: 900; text-transform: uppercase; margin-bottom: 20px; font-family: 'Montserrat'; line-height: 0.9; letter-spacing: -2px; }
+        .form-container { flex: 1; min-width: 320px; background: white; padding: 60px 10%; display: flex; align-items: center; }
+        .custom-input, select { width: 100%; padding: 15px; border: 1px solid #ddd; font-family: 'Montserrat'; outline: none; margin-bottom: 20px; font-size: 1rem; }
+        .input-label { display:block; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; color: #666; font-weight: 700; }
+        .phone-grid { display: grid; grid-template-columns: 100px 1fr; gap: 10px; margin-bottom: 5px; }
+
+        /* --- MEDIA QUERIES RESPONSIVE --- */
+
+        @media (max-width: 1024px) {
+            .section-desc { gap: 40px; padding: 80px 5%; }
+            .hero-content h1 { font-size: 4.5rem; }
         }
 
-        /* --- FORM SECTION --- */
-        .form-section { display: flex; flex-wrap: wrap; min-height: 900px; }
-        .form-text { flex: 1; min-width: 400px; padding: 100px 8%; background: var(--black); color: white; display: flex; flex-direction: column; justify-content: center; }
-        .form-text h2 { font-size: 4rem; color: var(--gold); font-weight: 900; text-transform: uppercase; margin-bottom: 20px; font-family: 'Montserrat'; line-height: 0.9; letter-spacing: -2px; }
-        .form-container { flex: 1; min-width: 400px; background: white; padding: 60px 10%; display: flex; align-items: center; }
-        .custom-input, select { width: 100%; padding: 15px; border: 1px solid #ddd; font-family: 'Montserrat'; outline: none; margin-bottom: 20px; }
-        .input-label { display:block; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; color: #666; font-weight: 700; }
-        .phone-grid { display: grid; grid-template-columns: 120px 1fr; gap: 10px; margin-bottom: 5px; }
-        .captcha-container { background: #f9f9f9; padding: 15px; border: 1px solid #eee; margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
-        #success-screen { display: none; text-align: center; width: 100%; }
-
         @media (max-width: 992px) {
-            .hero-content h1 { font-size: 3.5rem; letter-spacing: -1px; }
-            .section-desc { grid-template-columns: 1fr; padding: 60px 5%; gap: 50px; }
-            .lifestyle-card { padding: 40px; text-align: center; border-left: none; border-top: 5px solid var(--gold); }
-            .lifestyle-card h2 { font-size: 2.5rem; }
-            .amenities-grid { grid-template-columns: repeat(2, 1fr); }
-            .specs-bar { flex-direction: column; gap: 20px; padding: 30px 5%; position: relative; bottom: auto; background: var(--black); }
-            .spec-item { border-right: none; border-bottom: 1px solid #222; width: 100%; padding-bottom: 15px; }
+            /* Hero & Specs */
+            .hero-content { margin-bottom: 0; padding-top: 60px; }
+            .specs-bar { 
+                position: relative; 
+                flex-wrap: wrap; 
+                display: grid; 
+                grid-template-columns: 1fr 1fr;
+                padding: 40px 5%;
+                gap: 20px;
+            }
+            .spec-item { border-right: none; padding: 0; text-align: left; }
+            .btn-cta-specs { grid-column: span 2; margin-left: 0; text-align: center; padding: 20px; margin-top: 10px; }
+
+            /* Description */
+            .section-desc { grid-template-columns: 1fr; text-align: center; }
+            .desc-content { max-width: 100%; }
+            .desc-content h2 { font-size: 2.8rem; }
+            .gold-frame-container { max-width: 500px; margin: 0 auto; }
+
+            /* Amenities */
+            .amenities-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .amenity-item { padding: 30px 15px; }
+
+            /* Lifestyle */
+            .lifestyle { background-attachment: scroll; justify-content: center; padding: 60px 5%; }
+            .lifestyle-card { padding: 40px 30px; border-left: none; border-top: 5px solid var(--gold); text-align: center; }
+            .lifestyle-card h2 { font-size: 2.2rem; }
+        }
+
+        @media (max-width: 600px) {
+            .hero-content h1 { font-size: 3rem; letter-spacing: -2px; }
+            .location-tag { font-size: 0.8rem; letter-spacing: 3px; }
+            .logo-main { width: 140px; }
+
+            .specs-bar { grid-template-columns: 1fr 1fr; }
+            .spec-value { font-size: 1.1rem; }
+
+            .amenities-grid { grid-template-columns: 1fr; }
+            
+            .form-text, .form-container { padding: 60px 8%; }
+            
+            .phone-grid { grid-template-columns: 80px 1fr; }
+            
+            footer { padding: 40px 20px; }
         }
     </style>
 </head>
@@ -339,12 +359,12 @@
             <img src="https://i.ibb.co/23WcQzRX/JM-LOGOBLANCO.png" alt="MUV Negocios Inmobiliarios" class="logo-main">
             <p class="location-tag">Laguna del Sauce, Punta del Este</p>
             <h1>Laguna <br> del Sauce</h1>
-            <p style="text-transform: uppercase; letter-spacing: 8px; font-weight: 300; margin-top: 10px;">Chacra Marítima de Lujo</p>
+            <p style="text-transform: uppercase; letter-spacing: 4px; font-weight: 300; margin-top: 10px;">Chacra Marítima de Lujo</p>
         </div>
 
         <section class="specs-bar">
             <div class="spec-item">
-                <span class="spec-label">Precio de Venta</span>
+                <span class="spec-label">Precio</span>
                 <span class="spec-value">US$ 3.900.000</span>
             </div>
             <div class="spec-item">
@@ -356,7 +376,7 @@
                 <span class="spec-value">5 Hectáreas</span>
             </div>
             <div class="spec-item">
-                <span class="spec-label">Características</span>
+                <span class="spec-label">Features</span>
                 <span class="spec-value">Muelle Privado</span>
             </div>
             <a href="#contacto" class="btn-cta-specs">Agendar Visita</a>
@@ -367,7 +387,7 @@
         <div class="desc-content">
             <span class="pre-title">DISEÑO EXCLUSIVO</span>
             <h2>El Arte de Vivir en la Naturaleza</h2>
-            <p>Ubicada en el enclave más selecto de Uruguay, esta propiedad redefine el concepto de lujo. Una arquitectura que respira junto a la laguna, diseñada para quienes buscan privacidad absoluta sin renunciar a la sofisticación moderna.</p>
+            <p>Ubicada en el enclave más selecto de Uruguay, esta propiedad redefine el concepto de lujo contemporáneo.</p>
             <p>Cada rincón ha sido proyectado para capturar la luz única de Punta del Este, creando espacios donde el confort y la serenidad conviven en total armonía.</p>
         </div>
         <div class="gold-frame-container">
@@ -392,15 +412,15 @@
             <div class="amenity-item"><i class="fas fa-anchor"></i><h4>Muelle Propio</h4></div>
             <div class="amenity-item"><i class="fas fa-swimmer"></i><h4>Piscina Infinity</h4></div>
             <div class="amenity-item"><i class="fas fa-film"></i><h4>Sala de Cine</h4></div>
-            <div class="amenity-item"><i class="fas fa-tennis-ball"></i><h4>Canchas de Tenis</h4></div>
+            <div class="amenity-item"><i class="fas fa-tennis-ball"></i><h4>Canchas</h4></div>
         </div>
     </section>
 
     <section class="lifestyle">
         <div class="lifestyle-card">
-            <span class="tag">Experiencia Signature</span>
+            <span class="tag" style="color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.7rem; font-weight: 700; margin-bottom: 15px; display: block;">Experiencia Signature</span>
             <h2>Donde la exclusividad encuentra su hogar</h2>
-            <p>Un refugio diseñado para los sentidos, donde cada amanecer frente a la laguna es una invitación al equilibrio. Disfrute de la privacidad más absoluta en un entorno que celebra el bienestar y el buen vivir.</p>
+            <p>Un refugio diseñado para los sentidos, donde cada amanecer es una invitación al equilibrio absoluto.</p>
         </div>
     </section>
 
@@ -408,101 +428,67 @@
         <div class="form-text">
             <h2>Consulte con un Especialista</h2>
             <p>Complete el formulario para recibir asesoramiento personalizado de **MUV Negocios Inmobiliarios**.</p>
-            <p style="margin-top: 20px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 2px;">"Conectar con confianza"</p>
         </div>
         <div class="form-container">
-            <div id="success-screen">
-                <i class="fas fa-check-circle" style="font-size: 4rem; color: var(--gold); margin-bottom: 20px; display: block;"></i>
-                <h3 style="font-family: Montserrat; font-weight: 900; text-transform: uppercase;">¡Solicitud Recibida!</h3>
-                <p>Gracias por confiar en nosotros. Nos contactaremos a la brevedad.</p>
-            </div>
-
-            <form id="customGhlForm" action="https://services.leadconnectorhq.com/hooks/39amC1iRQZse4d4621AU/webhook-trigger/f57fa770-976b-49ce-9c6f-5db203d1a89b" method="POST" target="hidden_iframe" style="width: 100%;">
-                <div style="display: flex; gap: 20px;">
-                    <div style="flex:1;"><span class="input-label">Nombre</span><input type="text" name="first_name" class="custom-input" required></div>
-                    <div style="flex:1;"><span class="input-label">Apellido</span><input type="text" name="last_name" class="custom-input" required></div>
+            <form id="customGhlForm" style="width: 100%;">
+                <div style="display: flex; flex-wrap: wrap; gap: 0 20px;">
+                    <div style="flex:1; min-width: 140px;"><span class="input-label">Nombre</span><input type="text" name="first_name" class="custom-input" required></div>
+                    <div style="flex:1; min-width: 140px;"><span class="input-label">Apellido</span><input type="text" name="last_name" class="custom-input" required></div>
                 </div>
                 <span class="input-label">Email Corporativo</span>
                 <input type="email" name="email" class="custom-input" required>
                 
                 <span class="input-label">Celular</span>
                 <div class="phone-grid">
-                    <select id="country_code">
-                        <option value="+598" selected>🇺🇾 +598</option>
+                    <select id="country_code" style="padding: 10px; border: 1px solid #ddd;">
+                        <option value="+598">🇺🇾 +598</option>
                         <option value="+54">🇦🇷 +54</option>
-                        <option value="+1">🇺🇸 +1</option>
                     </select>
                     <input type="tel" id="local_phone" class="custom-input" placeholder="91 234 567" required style="margin-bottom:0;">
                 </div>
-                <input type="hidden" name="phone" id="final_phone">
 
-                <span class="input-label">¿Desea visitar la propiedad?</span>
-                <select name="visit"><option value="Si">Sí, quiero visitarla</option><option value="No">No, solo estoy mirando</option></select>
-
-                <div class="captcha-container">
-                    <span id="captcha-text" class="captcha-question" style="font-weight:bold;"></span>
+                <div class="captcha-container" style="margin-top:20px;">
+                    <span id="captcha-text" style="font-weight:bold;"></span>
                     <input type="number" id="captcha-input" class="custom-input" style="width: 80px; margin-bottom:0;" required>
                 </div>
-                <button type="submit" id="submitBtn" class="btn-cta-specs" style="width: 100%; border: none;">Enviar Solicitud</button>
+                <button type="submit" id="submitBtn" class="btn-cta-specs" style="width: 100%; border: none; margin-top:20px;">Enviar Solicitud</button>
             </form>
         </div>
     </section>
 
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { handleSuccess(); }"></iframe>
-
-    <footer style="padding: 60px; background: #000; text-align: center; color: #444; font-size: 0.7rem; border-top: 1px solid #111;">
+    <footer style="padding: 60px 20px; background: #000; text-align: center; color: #444; font-size: 0.7rem; border-top: 1px solid #111;">
         <p style="letter-spacing: 5px; text-transform: uppercase; color: #888; font-weight: 700; margin-bottom: 20px;">MUV Negocios Inmobiliarios</p>
-        <p>© 2026 MUV Negocios Inmobiliarios | Punta del Este | "Conectar con confianza"</p>
+        <p>© 2026 MUV | Punta del Este</p>
     </footer>
 
     <script>
         // SLIDER HEADER
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
-        function changeSlide(direction) {
+        setInterval(() => {
             slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
-        }
-        setInterval(() => changeSlide(1), 10000);
+        }, 8000);
 
         // SLIDER DESCRIPTIVO
         function moveDescSlider(direction) {
             const track = document.getElementById('descSlider');
-            const slideWidth = track.clientWidth;
-            track.scrollBy({ left: direction * slideWidth, behavior: 'smooth' });
+            track.scrollBy({ left: direction * track.clientWidth, behavior: 'smooth' });
         }
 
-        // CAPTCHA
-        let captchaResult;
-        function genCaptcha() {
-            const a = Math.floor(Math.random() * 9) + 1;
-            const b = Math.floor(Math.random() * 9) + 1;
-            captchaResult = a + b;
-            document.getElementById('captcha-text').innerText = `${a} + ${b} =`;
-        }
-        genCaptcha();
-
-        // FORM LOGIC
-        let submitted = false;
-        document.getElementById('customGhlForm').onsubmit = function() {
-            if(parseInt(document.getElementById('captcha-input').value) !== captchaResult) {
-                alert("Verificación incorrecta."); genCaptcha(); return false;
+        // CAPTCHA SIMPLE
+        let a = Math.floor(Math.random() * 9) + 1;
+        let b = Math.floor(Math.random() * 9) + 1;
+        document.getElementById('captcha-text').innerText = `${a} + ${b} =`;
+        
+        document.getElementById('customGhlForm').onsubmit = function(e) {
+            if(parseInt(document.getElementById('captcha-input').value) !== (a+b)) {
+                alert("Verificación incorrecta");
+                return false;
             }
-            const code = document.getElementById('country_code').value;
-            let local = document.getElementById('local_phone').value.replace(/[^\d+]/g, "");
-            if (local.startsWith('0')) local = local.substring(1);
-            document.getElementById('final_phone').value = code + local;
-            submitted = true;
-            document.getElementById('submitBtn').innerText = "PROCESANDO...";
-            return true;
+            document.getElementById('submitBtn').innerText = "Enviando...";
         };
-
-        function handleSuccess() {
-            document.getElementById('customGhlForm').style.display = "none";
-            document.getElementById('success-screen').style.display = "block";
-            window.scrollTo({ top: document.getElementById('contacto').offsetTop, behavior: 'smooth' });
-        }
     </script>
 </body>
 </html>
