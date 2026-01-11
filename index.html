@@ -24,8 +24,9 @@
             width: 100%;
             overflow: hidden;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
             color: var(--white);
             text-align: center;
         }
@@ -51,10 +52,7 @@
             100% { transform: scale(1.15); }
         }
 
-        .slide.active { 
-            opacity: 1; 
-            animation: kenburns 12s linear forwards; 
-        }
+        .slide.active { opacity: 1; animation: kenburns 12s linear forwards; }
 
         .hero-overlay {
             position: absolute;
@@ -72,7 +70,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-bottom: 80px; 
+            flex-grow: 1;
         }
         
         .logo-main { 
@@ -102,12 +100,10 @@
             letter-spacing: -3px;
         }
 
-        /* --- BARRA DE CARACTERÍSTICAS --- */
-        .specs-bar {
+        /* --- SPECS BARS (DUAL VERSION) --- */
+        .specs-bar-desktop {
             position: absolute; 
-            bottom: 0;          
-            left: 0;            
-            z-index: 10;        
+            bottom: 0; left: 0; z-index: 10;
             background: rgba(10, 10, 10, 0.95); 
             color: var(--white);
             padding: 25px 5%;
@@ -118,34 +114,24 @@
             width: 100%;
         }
 
-        .spec-item { 
-            text-align: center; 
-            border-right: 1px solid #333; 
-            padding: 0 40px; 
-            flex: 1; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        .specs-bar-mobile {
+            display: none;
+            z-index: 10;
+            width: 90%;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 4px;
         }
 
-        .spec-item:last-of-type { border-right: none; }
+        .spec-item { text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .specs-bar-desktop .spec-item { border-right: 1px solid #333; padding: 0 40px; }
+        .specs-bar-desktop .spec-item:last-of-type { border-right: none; }
 
-        .spec-label { 
-            display: block; 
-            font-size: 0.65rem; 
-            color: #888; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            margin-bottom: 8px; 
-        }
-
-        .spec-value { 
-            display: block; 
-            font-family: 'Montserrat', serif; 
-            font-size: 1.3rem; 
-            color: var(--gold); 
-            font-weight: 700;
-        }
+        .spec-label { display: block; font-size: 0.65rem; color: #888; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+        .spec-value { display: block; font-family: 'Montserrat', serif; font-size: 1.3rem; color: var(--gold); font-weight: 700; }
 
         .btn-cta-specs {
             background: var(--gold);
@@ -158,87 +144,21 @@
             transition: 0.4s;
             border: 1px solid var(--gold);
             cursor: pointer;
-            margin-left: 20px;
             letter-spacing: 1px;
             white-space: nowrap;
         }
-
         .btn-cta-specs:hover { background: transparent; color: var(--gold); }
 
-        /* --- SECCIÓN DESCRIPTION (SLIDER 4:5) --- */
-        .section-desc { 
-            padding: 100px 10%; 
-            display: grid; 
-            grid-template-columns: 1fr 1.1fr; 
-            gap: 100px; 
-            align-items: center; 
-            background: #fff;
-        }
-        
-        .desc-content { max-width: 500px; }
-        .desc-content .pre-title { color: var(--gold); letter-spacing: 4px; font-size: 0.8rem; font-weight: 700; margin-bottom: 15px; display: block; }
+        /* --- SECTIONS --- */
+        .section-desc { padding: 100px 10%; display: grid; grid-template-columns: 1fr 1.1fr; gap: 100px; align-items: center; background: #fff; }
         .desc-content h2 { font-size: 3.5rem; margin-bottom: 30px; font-family: 'Montserrat'; font-weight: 900; text-transform: uppercase; line-height: 1; color: var(--black); letter-spacing: -1px; }
         .desc-content p { font-size: 1.1rem; color: #555; margin-bottom: 25px; line-height: 1.8; }
-        
-        .gold-frame-container { 
-            padding: 15px; 
-            border: 1px solid var(--gold); 
-            position: relative;
-        }
-
-        .desc-slider-container {
-            width: 100%;
-            aspect-ratio: 4 / 5; 
-            position: relative;
-            overflow: hidden;
-            background: #f0f0f0;
-        }
-
-        .desc-slider-track {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            scroll-behavior: smooth;
-        }
-
+        .gold-frame-container { padding: 15px; border: 1px solid var(--gold); position: relative; }
+        .desc-slider-container { width: 100%; aspect-ratio: 4 / 5; position: relative; overflow: hidden; background: #f0f0f0; }
+        .desc-slider-track { display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; }
         .desc-slider-track::-webkit-scrollbar { display: none; }
-
-        .desc-slide-img {
-            min-width: 100%;
-            height: 100%;
-            object-fit: cover;
-            scroll-snap-align: start;
-        }
-
-        .desc-nav {
-            position: absolute;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            gap: 10px;
-            z-index: 5;
-        }
-
-        .desc-nav-btn {
-            background: var(--white);
-            color: var(--black);
-            border: none;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        /* --- AMENITIES --- */
+        .desc-slide-img { min-width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; }
+        
         .amenities { padding: 100px 10%; background: #fbfbfb; text-align: center; }
         .amenities h3 { font-size: 3rem; margin-bottom: 60px; font-family: 'Montserrat'; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; }
         .amenities-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 50px; }
@@ -246,102 +166,36 @@
         .amenity-item i { font-size: 2.5rem; color: var(--gold); margin-bottom: 20px; display: block; }
         .amenity-item h4 { font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
         
-        /* --- LIFESTYLE --- */
-        .lifestyle {
-            position: relative;
-            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://i.ibb.co/3960L8Wv/13.jpg');
-            background-size: cover; 
-            background-position: center; 
-            background-attachment: fixed;
-            min-height: 85vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: flex-start; 
-            padding: 0 10%;
-        }
+        .lifestyle { position: relative; background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://i.ibb.co/3960L8Wv/13.jpg'); background-size: cover; background-position: center; min-height: 85vh; display: flex; align-items: center; justify-content: flex-start; padding: 0 10%; }
+        .lifestyle-card { background: rgba(10, 10, 10, 0.75); backdrop-filter: blur(15px); padding: 70px 60px; max-width: 650px; color: white; border-left: 5px solid var(--gold); box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        .lifestyle-card h2 { font-family: 'Montserrat', sans-serif; font-weight: 900; text-transform: uppercase; font-size: 3.5rem; line-height: 1; margin-bottom: 25px; letter-spacing: -1.5px; }
 
-        .lifestyle-card {
-            background: rgba(10, 10, 10, 0.75);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 70px 60px;
-            max-width: 650px;
-            color: white;
-            border-left: 5px solid var(--gold);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-        }
+        /* --- MAP SECTION --- */
+        .map-section { width: 100%; height: 500px; background: #eee; border-top: 5px solid var(--gold); border-bottom: 5px solid var(--gold); }
+        .map-section iframe { width: 100%; height: 100%; filter: saturate(1.2); }
 
-        .lifestyle-card h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 3.5rem;
-            line-height: 1;
-            margin-bottom: 25px;
-            letter-spacing: -1.5px;
-        }
-
-        /* --- FORM SECTION --- */
-        .form-section { display: flex; flex-wrap: wrap; min-height: 600px; }
-        .form-text { flex: 1; min-width: 320px; padding: 80px 8%; background: var(--black); color: white; display: flex; flex-direction: column; justify-content: center; }
+        /* --- FORM SECTION RESTAURADA --- */
+        .form-section { display: flex; flex-wrap: wrap; min-height: 900px; }
+        .form-text { flex: 1; min-width: 320px; padding: 100px 8%; background: var(--black); color: white; display: flex; flex-direction: column; justify-content: center; }
         .form-text h2 { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--gold); font-weight: 900; text-transform: uppercase; margin-bottom: 20px; font-family: 'Montserrat'; line-height: 0.9; letter-spacing: -2px; }
         .form-container { flex: 1; min-width: 320px; background: white; padding: 60px 10%; display: flex; align-items: center; }
         .custom-input, select { width: 100%; padding: 15px; border: 1px solid #ddd; font-family: 'Montserrat'; outline: none; margin-bottom: 20px; font-size: 1rem; }
         .input-label { display:block; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; color: #666; font-weight: 700; }
-        .phone-grid { display: grid; grid-template-columns: 100px 1fr; gap: 10px; margin-bottom: 5px; }
-
-        /* --- MEDIA QUERIES RESPONSIVE --- */
-
-        @media (max-width: 1024px) {
-            .section-desc { gap: 40px; padding: 80px 5%; }
-            .hero-content h1 { font-size: 4.5rem; }
-        }
+        .phone-grid { display: grid; grid-template-columns: 120px 1fr; gap: 10px; margin-bottom: 5px; }
+        .captcha-container { background: #f9f9f9; padding: 15px; border: 1px solid #eee; margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
+        #success-screen { display: none; text-align: center; width: 100%; }
 
         @media (max-width: 992px) {
-            /* Hero & Specs */
-            .hero-content { margin-bottom: 0; padding-top: 60px; }
-            .specs-bar { 
-                position: relative; 
-                flex-wrap: wrap; 
-                display: grid; 
-                grid-template-columns: 1fr 1fr;
-                padding: 40px 5%;
-                gap: 20px;
-            }
-            .spec-item { border-right: none; padding: 0; text-align: left; }
-            .btn-cta-specs { grid-column: span 2; margin-left: 0; text-align: center; padding: 20px; margin-top: 10px; }
-
-            /* Description */
-            .section-desc { grid-template-columns: 1fr; text-align: center; }
-            .desc-content { max-width: 100%; }
-            .desc-content h2 { font-size: 2.8rem; }
-            .gold-frame-container { max-width: 500px; margin: 0 auto; }
-
-            /* Amenities */
+            .specs-bar-desktop { display: none; }
+            .specs-bar-mobile { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+            .specs-bar-mobile .btn-cta-specs { grid-column: span 2; width: 100%; margin: 0; }
+            .hero-content { justify-content: flex-start; padding-top: 40px; }
+            .section-desc { grid-template-columns: 1fr; text-align: center; padding: 60px 5%; }
             .amenities-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .amenity-item { padding: 30px 15px; }
-
-            /* Lifestyle */
             .lifestyle { background-attachment: scroll; justify-content: center; padding: 60px 5%; }
             .lifestyle-card { padding: 40px 30px; border-left: none; border-top: 5px solid var(--gold); text-align: center; }
             .lifestyle-card h2 { font-size: 2.2rem; }
-        }
-
-        @media (max-width: 600px) {
-            .hero-content h1 { font-size: 3rem; letter-spacing: -2px; }
-            .location-tag { font-size: 0.8rem; letter-spacing: 3px; }
-            .logo-main { width: 140px; }
-
-            .specs-bar { grid-template-columns: 1fr 1fr; }
-            .spec-value { font-size: 1.1rem; }
-
-            .amenities-grid { grid-template-columns: 1fr; }
-            
-            .form-text, .form-container { padding: 60px 8%; }
-            
-            .phone-grid { grid-template-columns: 80px 1fr; }
-            
-            footer { padding: 40px 20px; }
+            .map-section { height: 350px; }
         }
     </style>
 </head>
@@ -356,29 +210,25 @@
         <div class="hero-overlay"></div>
 
         <div class="hero-content">
-            <img src="https://i.ibb.co/23WcQzRX/JM-LOGOBLANCO.png" alt="MUV Negocios Inmobiliarios" class="logo-main">
+            <img src="https://i.ibb.co/23WcQzRX/JM-LOGOBLANCO.png" alt="MUV" class="logo-main">
             <p class="location-tag">Laguna del Sauce, Punta del Este</p>
             <h1>Laguna <br> del Sauce</h1>
             <p style="text-transform: uppercase; letter-spacing: 4px; font-weight: 300; margin-top: 10px;">Chacra Marítima de Lujo</p>
         </div>
 
-        <section class="specs-bar">
-            <div class="spec-item">
-                <span class="spec-label">Precio</span>
-                <span class="spec-value">US$ 3.900.000</span>
-            </div>
-            <div class="spec-item">
-                <span class="spec-label">Dormitorios</span>
-                <span class="spec-value">5 En Suite</span>
-            </div>
-            <div class="spec-item">
-                <span class="spec-label">Superficie</span>
-                <span class="spec-value">5 Hectáreas</span>
-            </div>
-            <div class="spec-item">
-                <span class="spec-label">Features</span>
-                <span class="spec-value">Muelle Privado</span>
-            </div>
+        <section class="specs-bar-mobile">
+            <div class="spec-item"><span class="spec-label">Precio</span><span class="spec-value">US$ 3.9M</span></div>
+            <div class="spec-item"><span class="spec-label">Dormitorios</span><span class="spec-value">5 Suite</span></div>
+            <div class="spec-item"><span class="spec-label">Superficie</span><span class="spec-value">5 Has.</span></div>
+            <div class="spec-item"><span class="spec-label">Features</span><span class="spec-value">Muelle</span></div>
+            <a href="#contacto" class="btn-cta-specs">Agendar Visita</a>
+        </section>
+
+        <section class="specs-bar-desktop">
+            <div class="spec-item"><span class="spec-label">Precio</span><span class="spec-value">US$ 3.900.000</span></div>
+            <div class="spec-item"><span class="spec-label">Dormitorios</span><span class="spec-value">5 En Suite</span></div>
+            <div class="spec-item"><span class="spec-label">Superficie</span><span class="spec-value">5 Hectáreas</span></div>
+            <div class="spec-item"><span class="spec-label">Features</span><span class="spec-value">Muelle Privado</span></div>
             <a href="#contacto" class="btn-cta-specs">Agendar Visita</a>
         </section>
     </header>
@@ -388,18 +238,12 @@
             <span class="pre-title">DISEÑO EXCLUSIVO</span>
             <h2>El Arte de Vivir en la Naturaleza</h2>
             <p>Ubicada en el enclave más selecto de Uruguay, esta propiedad redefine el concepto de lujo contemporáneo.</p>
-            <p>Cada rincón ha sido proyectado para capturar la luz única de Punta del Este, creando espacios donde el confort y la serenidad conviven en total armonía.</p>
         </div>
         <div class="gold-frame-container">
             <div class="desc-slider-container">
                 <div class="desc-slider-track" id="descSlider">
-                    <img src="https://i.ibb.co/6kZFHJZ/22.jpg" class="desc-slide-img" alt="Vista 1">
-                    <img src="https://i.ibb.co/FbFZ9L3z/6.jpg" class="desc-slide-img" alt="Vista 2">
-                    <img src="https://i.ibb.co/Sw82c4sk/1.jpg" class="desc-slide-img" alt="Vista 3">
-                </div>
-                <div class="desc-nav">
-                    <button class="desc-nav-btn" onclick="moveDescSlider(-1)"><i class="fas fa-arrow-left"></i></button>
-                    <button class="desc-nav-btn" onclick="moveDescSlider(1)"><i class="fas fa-arrow-right"></i></button>
+                    <img src="https://i.ibb.co/6kZFHJZ/22.jpg" class="desc-slide-img" alt="1">
+                    <img src="https://i.ibb.co/FbFZ9L3z/6.jpg" class="desc-slide-img" alt="2">
                 </div>
             </div>
         </div>
@@ -416,45 +260,46 @@
         </div>
     </section>
 
+    <section class="map-section">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3274.650845347231!2d-55.06141322424953!3d-34.839910572871784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x950ac799307d6f5f%3A0xe7498305c6d32a9e!2sLaguna%20del%20Sauce!5e0!3m2!1ses!2suy!4v1700000000000!5m2!1ses!2suy" frameborder="0" allowfullscreen="" loading="lazy"></iframe>
+    </section>
+
     <section class="lifestyle">
-        <div class="lifestyle-card">
-            <span class="tag" style="color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.7rem; font-weight: 700; margin-bottom: 15px; display: block;">Experiencia Signature</span>
-            <h2>Donde la exclusividad encuentra su hogar</h2>
-            <p>Un refugio diseñado para los sentidos, donde cada amanecer es una invitación al equilibrio absoluto.</p>
-        </div>
+        <div class="lifestyle-card"><h2>Un Santuario Privado</h2><p>Conectar con confianza en cada espacio diseñado para el bienestar.</p></div>
     </section>
 
     <section class="form-section" id="contacto">
         <div class="form-text">
             <h2>Consulte con un Especialista</h2>
-            <p>Complete el formulario para recibir asesoramiento personalizado de **MUV Negocios Inmobiliarios**.</p>
+            <p>Asesoramiento personalizado por **MUV Negocios Inmobiliarios**.</p>
         </div>
         <div class="form-container">
-            <form id="customGhlForm" style="width: 100%;">
+            <div id="success-screen">
+                <i class="fas fa-check-circle" style="font-size: 4rem; color: var(--gold); margin-bottom: 20px; display: block;"></i>
+                <h3 style="font-family: Montserrat; font-weight: 900; text-transform: uppercase;">¡Solicitud Recibida!</h3>
+            </div>
+            <form id="customGhlForm" action="https://services.leadconnectorhq.com/hooks/39amC1iRQZse4d4621AU/webhook-trigger/f57fa770-976b-49ce-9c6f-5db203d1a89b" method="POST" target="hidden_iframe" style="width: 100%;">
                 <div style="display: flex; flex-wrap: wrap; gap: 0 20px;">
                     <div style="flex:1; min-width: 140px;"><span class="input-label">Nombre</span><input type="text" name="first_name" class="custom-input" required></div>
                     <div style="flex:1; min-width: 140px;"><span class="input-label">Apellido</span><input type="text" name="last_name" class="custom-input" required></div>
                 </div>
                 <span class="input-label">Email Corporativo</span>
                 <input type="email" name="email" class="custom-input" required>
-                
                 <span class="input-label">Celular</span>
                 <div class="phone-grid">
-                    <select id="country_code" style="padding: 10px; border: 1px solid #ddd;">
-                        <option value="+598">🇺🇾 +598</option>
-                        <option value="+54">🇦🇷 +54</option>
-                    </select>
+                    <select id="country_code"><option value="+598">🇺🇾 +598</option><option value="+54">🇦🇷 +54</option><option value="+1">🇺🇸 +1</option></select>
                     <input type="tel" id="local_phone" class="custom-input" placeholder="91 234 567" required style="margin-bottom:0;">
                 </div>
-
-                <div class="captcha-container" style="margin-top:20px;">
-                    <span id="captcha-text" style="font-weight:bold;"></span>
-                    <input type="number" id="captcha-input" class="custom-input" style="width: 80px; margin-bottom:0;" required>
-                </div>
-                <button type="submit" id="submitBtn" class="btn-cta-specs" style="width: 100%; border: none; margin-top:20px;">Enviar Solicitud</button>
+                <input type="hidden" name="phone" id="final_phone">
+                <span class="input-label">¿Desea visitar la propiedad?</span>
+                <select name="visit"><option value="Si">Sí, quiero visitarla</option><option value="No">No, solo estoy mirando</option></select>
+                <div class="captcha-container"><span id="captcha-text" style="font-weight:bold;"></span><input type="number" id="captcha-input" class="custom-input" style="width: 80px; margin-bottom:0;" required></div>
+                <button type="submit" id="submitBtn" class="btn-cta-specs" style="width: 100%; border: none;">Enviar Solicitud</button>
             </form>
         </div>
     </section>
+
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { handleSuccess(); }"></iframe>
 
     <footer style="padding: 60px 20px; background: #000; text-align: center; color: #444; font-size: 0.7rem; border-top: 1px solid #111;">
         <p style="letter-spacing: 5px; text-transform: uppercase; color: #888; font-weight: 700; margin-bottom: 20px;">MUV Negocios Inmobiliarios</p>
@@ -462,33 +307,32 @@
     </footer>
 
     <script>
-        // SLIDER HEADER
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
-        setInterval(() => {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }, 8000);
+        setInterval(() => { slides[currentSlide].classList.remove('active'); currentSlide = (currentSlide + 1) % slides.length; slides[currentSlide].classList.add('active'); }, 8000);
 
-        // SLIDER DESCRIPTIVO
-        function moveDescSlider(direction) {
-            const track = document.getElementById('descSlider');
-            track.scrollBy({ left: direction * track.clientWidth, behavior: 'smooth' });
+        let captchaResult;
+        function genCaptcha() {
+            const a = Math.floor(Math.random() * 9) + 1; const b = Math.floor(Math.random() * 9) + 1;
+            captchaResult = a + b; document.getElementById('captcha-text').innerText = `${a} + ${b} =`;
         }
+        genCaptcha();
 
-        // CAPTCHA SIMPLE
-        let a = Math.floor(Math.random() * 9) + 1;
-        let b = Math.floor(Math.random() * 9) + 1;
-        document.getElementById('captcha-text').innerText = `${a} + ${b} =`;
-        
-        document.getElementById('customGhlForm').onsubmit = function(e) {
-            if(parseInt(document.getElementById('captcha-input').value) !== (a+b)) {
-                alert("Verificación incorrecta");
-                return false;
-            }
-            document.getElementById('submitBtn').innerText = "Enviando...";
+        let submitted = false;
+        document.getElementById('customGhlForm').onsubmit = function() {
+            if(parseInt(document.getElementById('captcha-input').value) !== captchaResult) { alert("Verificación incorrecta."); genCaptcha(); return false; }
+            const code = document.getElementById('country_code').value;
+            let local = document.getElementById('local_phone').value.replace(/[^\d+]/g, "");
+            if (local.startsWith('0')) local = local.substring(1);
+            document.getElementById('final_phone').value = code + local;
+            submitted = true; document.getElementById('submitBtn').innerText = "ENVIANDO..."; return true;
         };
+
+        function handleSuccess() {
+            document.getElementById('customGhlForm').style.display = "none";
+            document.getElementById('success-screen').style.display = "block";
+            window.scrollTo({ top: document.getElementById('contacto').offsetTop, behavior: 'smooth' });
+        }
     </script>
 </body>
 </html>
